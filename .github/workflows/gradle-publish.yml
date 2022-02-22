@@ -44,7 +44,7 @@ jobs:
     - name: Publish
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: publish artifactoryPublish
+        arguments: artifactoryPublish publish
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
