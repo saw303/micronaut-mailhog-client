@@ -43,7 +43,7 @@ jobs:
     - name: Publish to GitHub Packages
       uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
       with:
-        arguments: publish
+        arguments: publish artifactoryPublish
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
