@@ -13,16 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.wangler.micronaut.mailhog;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
-import lombok.Data;
-
-@Data
-public class Mime {
-
-  @JsonProperty("Parts")
-  private List<Part> parts = new ArrayList<>();
-}
