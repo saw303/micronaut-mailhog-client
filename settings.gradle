@@ -1,0 +1,30 @@
+pluginManagement {
+    repositories {
+        maven {
+            credentials {
+                // access properties available to settings.gradle
+                Map<String, Object> props = settings.extensions.extraProperties.properties
+                username props['artifactory_user'] as String ?: System.getenv('M2_USER')
+                password props['artifactory_password'] as String ?: System.getenv('M2_PWD')
+            }
+            url repoUrl
+        }
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        maven {
+            credentials {
+                // access properties available to settings.gradle
+                Map<String, Object> props = settings.extensions.extraProperties.properties
+                username props['artifactory_user'] as String ?: System.getenv('M2_USER')
+                password props['artifactory_password'] as String ?: System.getenv('M2_PWD')
+            }
+            url repoUrl
+        }
+    }
+}
+
+rootProject.name = 'micronaut-mailhog-client'
