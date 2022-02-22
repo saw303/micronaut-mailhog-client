@@ -20,6 +20,12 @@ jobs:
           - "8025:8025"
           - "1025:1025"
 
+    env:
+      M2_USER: ${{ secrets.M2_USER }}
+      M2_PWD: ${{ secrets.M2_PWD }}
+      GESUS_ARTIFACTORY_USER: ${{ secrets.M2_USER }}
+      GESUS_ARTIFACTORY_PASS: ${{ secrets.M2_PWD }}
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 17
@@ -32,9 +38,6 @@ jobs:
 
     - name: Prepare
       id: prepare
-      env:
-        M2_USER: ${{ secrets.M2_USER }}
-        M2_PWD: ${{ secrets.M2_PWD }}
       run: |
         git config --local user.name "Build"
         git config --local user.email "github@wangler.io"
@@ -47,9 +50,6 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: build
-      env:
-        M2_USER: ${{ secrets.M2_USER }}
-        M2_PWD: ${{ secrets.M2_PWD }}
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
@@ -60,16 +60,11 @@ jobs:
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        M2_USER: ${{ secrets.M2_USER }}
-        M2_PWD: ${{ secrets.M2_PWD }}
 
     - name: Publish to Artifactory
       uses: gradle/gradle-build-action@v2
       with:
         arguments: artifactoryPublish
-      env:
-        M2_USER: ${{ secrets.M2_USER }}
-        M2_PWD: ${{ secrets.M2_PWD }}
 
     - name: Push changes
       uses: ad-m/github-push-action@master
