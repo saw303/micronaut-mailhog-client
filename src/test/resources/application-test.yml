@@ -1,0 +1,5 @@
+micronaut:
+  http:
+    services:
+      mailhog:
+        url: http://localhost:8025

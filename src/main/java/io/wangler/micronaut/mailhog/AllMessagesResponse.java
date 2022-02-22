@@ -1,14 +1,17 @@
 package io.wangler.micronaut.mailhog;
 
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class AllMessagesResponse {
 
-    private long total;
-    private long count;
-    private long start;
+    private int total;
+    private int count;
+    private int start;
     private List<MailHogItem> items = new ArrayList<>();
 
     /*
