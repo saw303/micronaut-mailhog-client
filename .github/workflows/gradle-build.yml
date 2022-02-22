@@ -14,6 +14,13 @@ jobs:
       contents: read
       packages: write
 
+    services:
+      mail:
+        image: mailhog/mailhog
+        ports:
+          - "8025:8025"
+          - "1025:1025"
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 17
