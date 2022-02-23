@@ -57,6 +57,4 @@ jobs:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish tag
-      env:
-        TOKEN: ${{ secrets.M2_PWD }}
-      run: git push https://saw303:${TOKEN}@github.com/saw303/micronaut-mailhog-client.git --tags
+      run: git push https://${{ env.GIT_USERNAME }}:${{ secrets.GITHUB_TOKEN }}@github.com/saw303/micronaut-mailhog-client.git --tags
