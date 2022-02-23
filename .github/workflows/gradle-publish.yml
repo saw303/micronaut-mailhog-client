@@ -10,7 +10,7 @@ jobs:
 
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
 
     services:
@@ -39,8 +39,8 @@ jobs:
     - name: Prepare
       id: prepare
       run: |
-        git config --local user.name "Build"
-        git config --local user.email "github@wangler.io"
+        git config --local user.name "GitHub Actions"
+        git config --local user.email "gh-actions@wangler.io"
         git fetch --tags
 
     - name: Build with Gradle
@@ -57,4 +57,8 @@ jobs:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish tag
-      run: git push https://${{ env.GIT_USERNAME }}:${{ secrets.GITHUB_TOKEN }}@github.com/saw303/micronaut-mailhog-client.git --tags
+      uses: ad-m/github-push-action@master
+      with:
+        tags: true
+        branch: ${{ env.BRANCH_NAME }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
