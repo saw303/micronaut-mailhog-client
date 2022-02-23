@@ -76,6 +76,17 @@ class MailHoqClientSpec extends Specification {
         item == response.items.first()
 
         when:
+        AllMessagesResponse search = client.searchMessages(MailHogClient.MessageKind.from, 'hello')
+
+        then:
+        with(search) {
+            total == 1
+            start == 0
+            count == 1
+            items.size() == total
+        }
+
+        when:
         client.deleteMessage(response.items.first().id)
 
         then:

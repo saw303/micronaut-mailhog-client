@@ -45,4 +45,14 @@ public interface MailHogClient {
   @Delete("/api/v1/messages")
   @Consumes(value = {MediaType.APPLICATION_JSON, MediaType.TEXT_JSON})
   void deleteMessages();
+
+  @Get("/api/v2/search")
+  @Consumes(value = {MediaType.APPLICATION_JSON, MediaType.TEXT_JSON})
+  AllMessagesResponse searchMessages(@QueryValue MessageKind kind, @QueryValue String query);
+
+  enum MessageKind {
+    containing,
+    to,
+    from
+  }
 }
