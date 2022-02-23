@@ -1,6 +1,7 @@
 package io.wangler.micronaut.mailhog
 
 import io.micronaut.http.MediaType
+import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
 import spock.lang.Specification
@@ -67,6 +68,39 @@ class MailHoqClientSpec extends Specification {
             raw.data
             raw.helo
         }
+
+        when:
+        MailHogItem item = client.findMessage(response.items.first().id)
+
+        then:
+        item == response.items.first()
+
+        when:
+        client.deleteMessage(response.items.first().id)
+
+        then:
+        noExceptionThrown()
+
+        when:
+        client.findMessage(response.items.first().id)
+
+        then: 'unfortunately MailHog return 200 and body null instead of 404 w/o a body'
+        thrown(HttpClientResponseException)
+
+        when:
+        client.deleteMessages()
+
+        and:
+        response = client.findAllMessages()
+
+        then:
+        with(response) {
+            total == 0
+            start == 0
+            count == 0
+            items.isEmpty()
+        }
+
     }
 
     private void sendEmail() {

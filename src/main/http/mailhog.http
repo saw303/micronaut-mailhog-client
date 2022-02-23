@@ -1,2 +1,7 @@
-GET http://localhost:8025/api/v2/messages
+GET http://localhost:8025/api/v2/messages/
+Accept: application/json
+
+###
+
+DELETE http://localhost:8025/api/v2/messages/
 Accept: application/json

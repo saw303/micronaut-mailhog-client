@@ -17,6 +17,7 @@ package io.wangler.micronaut.mailhog;
 
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Consumes;
+import io.micronaut.http.annotation.Delete;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.client.annotation.Client;
@@ -32,4 +33,16 @@ public interface MailHogClient {
   @Consumes(value = {MediaType.APPLICATION_JSON, MediaType.TEXT_JSON})
   AllMessagesResponse findAllMessages(
       @QueryValue(defaultValue = "0") int start, @QueryValue(defaultValue = "50") int end);
+
+  @Get("/api/v1/messages/{id}")
+  @Consumes(value = {MediaType.APPLICATION_JSON, MediaType.TEXT_JSON})
+  MailHogItem findMessage(String id);
+
+  @Delete("/api/v1/messages/{id}")
+  @Consumes(value = {MediaType.APPLICATION_JSON, MediaType.TEXT_JSON})
+  void deleteMessage(String id);
+
+  @Delete("/api/v1/messages")
+  @Consumes(value = {MediaType.APPLICATION_JSON, MediaType.TEXT_JSON})
+  void deleteMessages();
 }
