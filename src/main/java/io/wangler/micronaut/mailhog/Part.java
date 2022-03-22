@@ -35,7 +35,7 @@ public class Part {
   private long size;
 
   @JsonProperty("MIME")
-  private String mime;
+  private Mime mime;
 
   public Optional<MediaType> mediaType() {
     if (headers.containsKey("Content-Type")) {
