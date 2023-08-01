@@ -1,28 +1,25 @@
 pluginManagement {
     repositories {
         maven {
-            credentials {
-                // access properties available to settings.gradle
-                Map<String, Object> props = settings.extensions.extraProperties.properties
-                username props['artifactory_user'] as String ?: System.getenv('M2_USER')
-                password props['artifactory_password'] as String ?: System.getenv('M2_PWD')
-            }
+            name = 'onstructive'
             url repoUrl
+            credentials(PasswordCredentials)
+            authentication {
+                digest(BasicAuthentication)
+            }
         }
-        gradlePluginPortal()
     }
 }
 
 dependencyResolutionManagement {
     repositories {
         maven {
-            credentials {
-                // access properties available to settings.gradle
-                Map<String, Object> props = settings.extensions.extraProperties.properties
-                username props['artifactory_user'] as String ?: System.getenv('M2_USER')
-                password props['artifactory_password'] as String ?: System.getenv('M2_PWD')
-            }
+            name = 'onstructive'
             url repoUrl
+            credentials(PasswordCredentials)
+            authentication {
+                digest(BasicAuthentication)
+            }
         }
     }
 }

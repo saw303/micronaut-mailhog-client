@@ -1,28 +1,28 @@
 plugins {
-    id 'gesus.java' version "${gesusGradlePluginVersion}"
-    id 'gesus.release' version "${gesusGradlePluginVersion}"
-    id "io.micronaut.library" version "3.3.0"
+    id 'groovy'
+    id 'ch.onstructive.gradle.release' version "${onstructiveGradlePluginVersion}"
+    id 'ch.onstructive.gradle.codestyle' version "${onstructiveGradlePluginVersion}"
+    id "io.micronaut.library" version "${micronautVersion}"
 }
 
 group = 'io.wangler.micronaut'
 
 dependencies {
     annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut:micronaut-runtime")
-    implementation("jakarta.annotation:jakarta.annotation-api")
-    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
 
     compileOnly("org.projectlombok:lombok")
 
     testImplementation 'javax.mail:mail:1.5.0-b01'
     testRuntimeOnly("ch.qos.logback:logback-classic")
+    testRuntimeOnly("org.yaml:snakeyaml")
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion("8")
-    targetCompatibility = JavaVersion.toVersion("8")
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
 }
 
 micronaut {

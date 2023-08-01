@@ -14,7 +14,6 @@ import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeMultipart
-import java.time.LocalDateTime
 
 @MicronautTest
 class MailHoqClientSpec extends Specification {
@@ -114,15 +113,11 @@ class MailHoqClientSpec extends Specification {
 
     }
 
-    private void sendEmail() {
-        sendEmail("Test Message ${LocalDateTime.now()}", "This is a text")
-    }
-
     private void sendEmail(String subject, String body) {
         Properties prop = new Properties()
         prop.put("mail.smtp.auth", false)
         prop.put("mail.smtp.host", "localhost")
-        prop.put("mail.smtp.port", "1025")
+        prop.put("mail.smtp.port", "21025")
 
         Session session = Session.getInstance(prop)
 

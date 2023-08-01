@@ -16,6 +16,7 @@
 package io.wangler.micronaut.mailhog;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.micronaut.serde.annotation.Serdeable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.Map;
 import lombok.Data;
 
 @Data
+@Serdeable
 public class Content {
 
   @JsonProperty("Headers")

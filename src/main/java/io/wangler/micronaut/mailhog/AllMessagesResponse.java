@@ -15,11 +15,13 @@
  */
 package io.wangler.micronaut.mailhog;
 
+import io.micronaut.serde.annotation.Serdeable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 
 @Data
+@Serdeable
 public class AllMessagesResponse {
 
   private int total;

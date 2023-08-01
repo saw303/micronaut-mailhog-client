@@ -16,12 +16,14 @@
 package io.wangler.micronaut.mailhog;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.micronaut.serde.annotation.Serdeable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 
 @Data
+@Serdeable
 public class MailHogItem {
 
   @JsonProperty("ID")
