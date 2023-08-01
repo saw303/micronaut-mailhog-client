@@ -43,15 +43,10 @@ jobs:
         git config --local user.email "gh-actions@wangler.io"
         git fetch --tags
 
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2
-      with:
-        arguments: build
-
     - name: Publish Jars
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: artifactoryPublish publish
+        arguments: -i build artifactoryPublish publish
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
