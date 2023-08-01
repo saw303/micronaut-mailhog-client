@@ -46,7 +46,7 @@ jobs:
     - name: Publish Jars
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: -i build artifactoryPublish publish
+        arguments: build artifactoryPublish publish
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
