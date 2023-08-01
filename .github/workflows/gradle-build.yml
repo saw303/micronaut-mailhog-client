@@ -15,8 +15,10 @@ jobs:
       packages: read
 
     env:
-      M2_USER: ${{ secrets.M2_USER}}
+      M2_USER: ${{ secrets.M2_USER }}
       M2_PWD: ${{ secrets.M2_PWD }}
+      ORG_GRADLE_PROJECT_onstructiveUsername: ${{ secrets.M2_USER }}
+      ORG_GRADLE_PROJECT_onstructivePassword: ${{ secrets.M2_PWD }}
 
     services:
       mail:
