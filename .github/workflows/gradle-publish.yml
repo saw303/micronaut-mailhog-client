@@ -2,8 +2,8 @@ name: Release to GitHub Packages
 
 on:
   push:
-    branches:
-      - '[0-9]+.[0-9]+.x'
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -38,22 +38,12 @@ jobs:
 
     - name: Prepare
       id: prepare
-      run: |
-        git config --local user.name "GitHub Actions"
-        git config --local user.email "gh-actions@wangler.io"
-        git fetch --tags
+      run: git fetch --tags
 
     - name: Publish Jars
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: build publish
+        arguments: check publish
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Publish tag
-      uses: ad-m/github-push-action@master
-      with:
-        tags: true
-        branch: ${{ env.BRANCH_NAME }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
